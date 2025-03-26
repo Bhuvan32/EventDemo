@@ -1,50 +1,77 @@
-# Welcome to your Expo app 👋
+# Grunt Tasks Documentation
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+This document lists all available Grunt tasks in the project.
 
-## Get started
+## Development Tasks
 
-1. Install dependencies
+### Main Development Tasks
+- `grunt dev` - Main development task that runs multiple subtasks including:
+  - Folder list generation
+  - Mail preview files generation
+  - Printable ticket generation
+  - Development build
+  - ULS development
+  - Various file copying tasks
+  - Watch mode
 
-   ```bash
-   npm install
-   ```
+- `grunt dev_minus_watch` - Runs development tasks without watch mode
+- `grunt common_tasks` - Runs common development tasks
+- `grunt build:dev` - Builds development environment
 
-2. Start the app
+### Component-Specific Development Tasks
+- `grunt portal_dev` - Runs portal development tasks
+- `grunt preview_dev` - Runs preview development tasks
+- `grunt embed_dev` - Runs embed development tasks
+- `grunt vc_dev` - Runs virtual community development tasks
+- `grunt site_entity` - Runs site entity development tasks
+- `grunt build:badge_preview_dev` - Builds badge preview development environment
+- `grunt build:agenda_printer` - Builds agenda printer
+- `grunt admin` - Runs admin tasks with Redis server and pricing proto development build
 
-   ```bash
-    npx expo start
-   ```
+## Production Tasks
 
-In the output, you'll find options to open the app in a
+### ULS Tasks
+- `grunt ulsDev` - Runs ULS development tasks
+- `grunt ulsProd` - Runs ULS production tasks
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+### Production Build Tasks
+- `grunt preProdBuild` - Runs pre-production build tasks in parallel:
+  - Generate mail preview files for translations
+  - Generate mail editor components
+  - Generate printable ticket
+  - Properties
+  - Copy various production files
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+- `grunt prodBuild1` - Runs first set of production build tasks in parallel:
+  - Community production build
+  - Preview production build
+  - Portal production build
+  - Pricing proto production build
 
-## Get a fresh project
+- `grunt prodBuild` - Runs second set of production build tasks in parallel:
+  - Embed production build
+  - Badge preview production build
+  - Agenda printer production build
 
-When you're ready, run:
+- `grunt afterProdBuild` - Runs post-production build tasks in parallel:
+  - File blocks for production
+  - CSS concatenation
+  - Server template copying
+  - Various minification tasks
 
-```bash
-npm run reset-project
-```
+## Utility Tasks
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+### File Generation Tasks
+- `grunt generateMailPreviewFilesForTranslations` - Generates mail preview files for all languages
+- `grunt generatePrintableTicket` - Generates printable ticket format
 
-## Learn more
+### Testing Tasks
+- `grunt scalaTest` - Runs Scala tests
 
-To learn more about developing your project with Expo, look at the following resources:
+### Deployment Tasks
+- `grunt localDeployment` - Handles local deployment
+- `grunt startServer` - Starts the server with necessary setup
+- `grunt replaceDev` - Replaces development configuration
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+## Default Task
+- `grunt` or `grunt default` - Runs the default task (same as `grunt dev`)
